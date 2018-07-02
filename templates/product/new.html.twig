@@ -1,0 +1,30 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}New Product{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <i class="fa fa-plus-square-o"></i>
+                    Add Article
+                </li>
+            </ol>
+            <form role="form">
+            {{ form_start(form) }}
+                <div class="form-group">
+            {{ form_row(form.name) }}
+                </div>
+                <div class="form-group">
+            {{ form_row(form.slug) }}
+                </div>
+            {{ form_row(form.price) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.created_ad) }}
+            {{ form_row(form.submit) }}
+            {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
