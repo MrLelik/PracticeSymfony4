@@ -15,9 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProductController extends Controller
 {
-    /**
-     * @Route("/", name="product_index", methods="GET")
-     */
+	/**
+	 * @Route("/", name="product_index", methods="GET")
+	 * @param ProductRepository $productRepository
+	 *
+	 * @return Response
+	 */
     public function index(ProductRepository $productRepository): Response
     {
         return $this->render('product/index.html.twig', [
@@ -25,9 +28,12 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/new", name="product_new", methods="GET|POST")
-     */
+	/**
+	 * @Route("/new", name="product_new", methods="GET|POST")
+	 * @param Request $request
+	 *
+	 * @return Response
+	 */
     public function new(Request $request): Response
     {
         $product = new Product();
@@ -48,17 +54,26 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="product_show", methods="GET")
-     */
+	/**
+	 * @Route("/{id}", name="product_show", methods="GET")
+	 * @param Product $product
+	 *
+	 * @return Response
+	 */
     public function show(Product $product): Response
     {
-        return $this->render('product/show.html.twig', ['product' => $product]);
+        return $this->render('product/show.html.twig', [
+        	'product' => $product
+        ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="product_edit", methods="GET|POST")
-     */
+	/**
+	 * @Route("/{id}/edit", name="product_edit", methods="GET|POST")
+	 * @param Request $request
+	 * @param Product $product
+	 *
+	 * @return Response
+	 */
     public function edit(Request $request, Product $product): Response
     {
         $form = $this->createForm(ProductType::class, $product);
@@ -76,9 +91,13 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="product_delete", methods="DELETE")
-     */
+	/**
+	 * @Route("/{id}", name="product_delete", methods="DELETE")
+	 * @param Request $request
+	 * @param Product $product
+	 *
+	 * @return Response
+	 */
     public function delete(Request $request, Product $product): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
